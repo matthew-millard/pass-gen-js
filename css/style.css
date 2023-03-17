@@ -1,43 +1,67 @@
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-html,
-body,
-.wrapper {
-  height: 100%;
-  margin: 0;
-  padding: 0;
+/* CSS Variables */
+:root {
+  /* colors */
+  --bg-gradient: linear-gradient(90deg, rgba(16,0,43,1) 0%, rgba(60,9,108,1) 35%, rgba(123,44,191,1) 100%);
+  --dark-semi-transparent: rgba(16,0,43,0.5);
+  --light-shade: #fff;
+  --button-color: #3C096C; 
+  /* effects */
+  --box-shadow-insane: rgba(240, 46, 170, 0.4) 5px 5px, rgba(240, 46, 170, 0.3) 10px 10px, rgba(240, 46, 170, 0.2) 15px 15px, rgba(240, 46, 170, 0.1) 20px 20px, rgba(240, 46, 170, 0.05) 25px 25px;
+  color: hsl(206, 17%, 28%); 
 }
 
 body {
-  font-family: sans-serif;
-  background-color: #f9fbfd;
+  background: var(--bg-gradient);
+  text-shadow: 3px 4px 4px rgba(16,0,43,0.5);
 }
 
-.wrapper {
-  padding-top: 30px;
-  padding-left: 20px;
-  padding-right: 20px;
+h1 {
+  color: var(--light-shade);
+  font-size: 3rem;
+  font-weight: 400;
 }
+
+h2 {
+  color: var(--light-shade);
+  font-size: 2rem;
+  font-weight: 300;
+}
+
+p,
+textarea,
+button,
+::placeholder {
+  font-size: 1.125rem;
+}
+
+.page-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  width: 100%;
+}
+
+
 
 header {
+  width: 90%;
+  max-width: 800px;
   text-align: center;
   padding: 20px;
   padding-top: 0px;
-  color: hsl(206, 17%, 28%);
 }
 
 .card {
-  background-color: hsl(0, 0%, 100%);
+  background-color: var(--dark-semi-transparent);
   border-radius: 5px;
   border-width: 1px;
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px 0px;
-  color: hsl(206, 17%, 28%);
+  box-shadow: var(--box-shadow-insane);
   font-size: 18px;
   margin: 0 auto;
+  width: 90%;
   max-width: 800px;
   padding: 30px 40px;
 }
@@ -74,13 +98,12 @@ header {
 
 .btn {
   border: none;
-  background-color: hsl(360, 91%, 36%);
+  background-color: var(--button-color);
   border-radius: 25px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 6px 0px rgba(0, 0, 0, 0.2) 0px 1px 1px
     0px;
   color: hsl(0, 0%, 100%);
   display: inline-block;
-  font-size: 22px;
   line-height: 22px;
   margin: 16px 16px 16px 20px;
   padding: 14px 34px;
@@ -108,17 +131,24 @@ button[disabled] {
   padding-left: 15px;
   padding-right: 15px;
   padding-bottom: 85px;
-  font-size: 1.2rem;
   text-align: center;
   margin-top: 10px;
   margin-bottom: 10px;
-  border: 2px dashed #c0c7cf;
+  border: 2px solid var(--light-shade);
   border-radius: 6px;
   resize: none;
   overflow: hidden;
 }
 
 @media (max-width: 690px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
   .btn {
     font-size: 1rem;
     margin: 16px 0px 0px 0px;
