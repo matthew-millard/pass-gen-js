@@ -38,9 +38,10 @@ function writePassword() {
 		console.log('testing...')
 	}
 
-	// Check whether there are any errors before proceeding to the next step
+	// Check whether there are any errors before proceeding to the next step.
 	if (errorMessages.length > 0) {
-		return
+		passwordText.value = '' // clears the last displayed password.
+		return // As there are errors, it will exit the function at this point.
 	}
 
 	var password = generatePassword(length, characters, specialCharacters)
@@ -62,15 +63,20 @@ function generatePassword(length, characters, specialCharacters) {
 	if (characters === 'YES' && specialCharacters === 'YES') {
 		var allCharacter = characterTypes.lowercase.concat(characterTypes.uppercase, characterTypes.number, characterTypes.specialChars)
 		for (var i = 0; i < length; i++) {
-			randomPassword.push(allCharacter[Math.floor(Math.random() * 95)])
+			randomPassword.push(allCharacter[Math.floor(Math.random() * allCharacter.length)])
 		}
-		return randomPassword.join('')
-		// } else if (characters === 'YES' && specialCharacters === 'NO') {
-
-		// } else if (characters === 'NO' && specialCharacters === 'YES') {
-
-		// }
+	} else if (characters === 'YES' && specialCharacters === 'NO') {
+		var allCharacter = characterTypes.lowercase.concat(characterTypes.uppercase, characterTypes.number)
+		for (var i = 0; i < length; i++) {
+			randomPassword.push(allCharacter[Math.floor(Math.random() * allCharacter.length)])
+		}
+	} else {
+		var allCharacter = characterTypes.specialChars
+		for (var i = 0; i < length; i++) {
+			randomPassword.push(allCharacter[Math.floor(Math.random() * allCharacter.length)])
+		}
 	}
+	return randomPassword.join('')
 }
 
 // function displayPassword(password) {
