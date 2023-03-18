@@ -45,4 +45,8 @@ select {
 
 *:focus {
   outline: 2px solid rgba(240, 46, 170, 0.4); 
-}     
+}   
+
+::selection {
+  background-color: rgba(240, 46, 170, 1);
+}

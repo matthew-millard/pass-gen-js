@@ -2,12 +2,13 @@
 
 // Get references to the #generate element
 var getPasswordBtn = document.querySelector('#generate')
+var passwordText = document.querySelector('#password')
 
 // Write password to the #password input
 function writePassword() {
 	var length = Math.round(prompt('How many characters would you like your password to be?')) // Converts a string value to a number value and will round to a whole number if the user inputs a decimal number.
-	var characters = prompt('Would you like your password to contain characters such as uppercase and lowercase letters and or numbers? (yes/no)').toUpperCase() // Returns a string value that is then converted to all uppercase to make it more streamline in test conditions.
-	var specialCharacters = prompt('Would you like your password to include special characters? yes / no').toUpperCase() // Returns a string value that is then converted to all uppercase to make it more streamline in test conditions.
+	var characters = prompt('Would you like your password to contain a combination of character types such as uppercase and lowercase letters and or numbers? yes / no').trim().toUpperCase() // Returns a string value that is then converted to all uppercase to make it more streamline in test conditions.
+	var specialCharacters = prompt('Would you like your password to include special characters? yes / no').trim().toUpperCase() // Returns a string value that is then converted to all uppercase to make it more streamline in test conditions. .trim() is used to remove any white space.
 	var errorMessages = []
 
 	// Check for length, type and value limits
@@ -30,17 +31,53 @@ function writePassword() {
 	} else if (specialCharacters !== 'YES' && specialCharacters !== 'NO') {
 		errorMessages.push('Again, ye dumb fuck! Enter either yes or fucking no --- special characters!')
 	}
-	console.log(length)
-	console.log(typeof length)
-	console.log(characters)
-	console.log(typeof characters)
-	console.log(specialCharacters)
-	console.log(typeof specialCharacters)
-	console.log(errorMessages)
+
+	// Check whether user has chosen to include at least one character type
+	if (characters === 'NO' && specialCharacters === 'NO') {
+		errorMessages.push('Password must include at least one character type!')
+		console.log('testing...')
+	}
+
+	// Check whether there are any errors before proceeding to the next step
+	if (errorMessages.length > 0) {
+		return
+	}
+
+	var password = generatePassword(length, characters, specialCharacters)
+	passwordText.value = password
 }
 
 // Add event listener to generate button
 getPasswordBtn.addEventListener('click', writePassword)
+
+function generatePassword(length, characters, specialCharacters) {
+	var characterTypes = {
+		lowercase: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'],
+		uppercase: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
+		number: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+		specialChars: ['!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '_', '`', '{', '|', '}', '~'],
+	}
+	var randomPassword = []
+
+	if (characters === 'YES' && specialCharacters === 'YES') {
+		var allCharacter = characterTypes.lowercase.concat(characterTypes.uppercase, characterTypes.number, characterTypes.specialChars)
+		for (var i = 0; i < length; i++) {
+			randomPassword.push(allCharacter[Math.floor(Math.random() * 95)])
+		}
+		return randomPassword.join('')
+		// } else if (characters === 'YES' && specialCharacters === 'NO') {
+
+		// } else if (characters === 'NO' && specialCharacters === 'YES') {
+
+		// }
+	}
+}
+
+// function displayPassword(password) {
+// 	var p = document.createElement('p')
+// 	textArea.appendChild(p).innerText = password
+// 	console.log(p)
+// }
 
 // Pseudo Code
 
@@ -70,4 +107,4 @@ getPasswordBtn.addEventListener('click', writePassword)
 // var password = generatePassword()
 // var passwordText = document.querySelector('#password')
 
-// passwordText.value = password
+//
