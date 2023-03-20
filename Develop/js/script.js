@@ -7,40 +7,40 @@ var passwordText = document.querySelector('#password')
 // Write password to the #password input
 function writePassword() {
 	var length = Math.round(prompt('How many characters would you like your password to be?')) // Converts a string value to a number value and will round to a whole number if the user inputs a decimal number.
-	var characters = prompt('Would you like your password to contain a combination of character types such as uppercase and lowercase letters and or numbers? yes / no').trim().toUpperCase() // Returns a string value that is then converted to all uppercase to make it more streamline in test conditions.
+	var characters = prompt('Would you like your password to contain a combination of character types such as uppercase and lowercase letters and numbers? yes / no').trim().toUpperCase() // Returns a string value that is then converted to all uppercase to make it more streamline in test conditions.
 	var specialCharacters = prompt('Would you like your password to include special characters? yes / no').trim().toUpperCase() // Returns a string value that is then converted to all uppercase to make it more streamline in test conditions. .trim() is used to remove any white space.
 	var errorMessages = []
 
 	// Check for length, type and value limits
 	if (!length || typeof length !== 'number' || isNaN(length)) {
-		errorMessages.push('Not a number. Try again!')
+		errorMessages.push('Please enter a number. Password must contain a minimum of 8 characters and a maximum of 128.')
 	} else if (length < 8 || length > 128) {
-		errorMessages.push('Password must contain a minimum of 8 characters and a maximum of 128!')
+		errorMessages.push('Password must contain a minimum of 8 characters and a maximum of 128.')
 	}
 
 	// Check user's  input is valid for character type option
 	if (!characters) {
-		errorMessages.push('Invalid input, ye dumb fuck!')
+		errorMessages.push('Please enter either "yes" or "no" if you would like to include character types in your password.')
 	} else if (characters !== 'YES' && characters !== 'NO') {
-		errorMessages.push('Again, ye dumb fuck! Enter either yes or fucking no!')
+		errorMessages.push('Please enter either "yes" or "no" if you would like to include character types in your password.')
 	}
 
 	// Check user's input is valid for special characters option
 	if (!specialCharacters) {
-		errorMessages.push('User did not enter a valid input.')
+		errorMessages.push('Please enter either "yes" or "no" if you would like to include special characters in your password.')
 	} else if (specialCharacters !== 'YES' && specialCharacters !== 'NO') {
-		errorMessages.push('Again, ye dumb fuck! Enter either yes or fucking no --- special characters!')
+		errorMessages.push('Please enter either "yes" or "no" if you would like to include special characters in your password.')
 	}
 
 	// Check whether user has chosen to include at least one character type
 	if (characters === 'NO' && specialCharacters === 'NO') {
-		errorMessages.push('Password must include at least one character type!')
-		console.log('testing...')
+		errorMessages.push('Password must include one of the following: different character types and/or special characters.')
 	}
 
 	// Check whether there are any errors before proceeding to the next step.
 	if (errorMessages.length > 0) {
 		passwordText.value = '' // clears the last displayed password.
+		showErrorMessages(errorMessages)
 		return // As there are errors, it will exit the function at this point.
 	}
 
@@ -77,6 +77,14 @@ function generatePassword(length, characters, specialCharacters) {
 		}
 	}
 	return randomPassword.join('')
+}
+
+function showErrorMessages(errorMessages) {
+	var errorMessagesList = document.querySelector('.error-messages__list')
+	errorMessages.forEach(error => {
+		var li = document.createElement('li')
+		errorMessagesList.appendChild(li).innerText = error
+	})
 }
 
 // function displayPassword(password) {
