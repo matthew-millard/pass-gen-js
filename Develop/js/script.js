@@ -1,5 +1,3 @@
-// Assignment code here
-
 // Get references to the #generate element
 var getPasswordBtn = document.querySelector('#generate')
 var passwordText = document.querySelector('#password')
@@ -39,7 +37,7 @@ function writePassword() {
 
 	// Check whether there are any errors before proceeding to the next step.
 	if (errorMessages.length > 0) {
-		passwordText.value = '' // clears the last displayed password.
+		passwordText.value = '' // clears the last displayed password if there are errors the next time a password has been attempted to be generated.
 		showErrorMessages(errorMessages)
 		return // As there are errors, it will exit the function at this point.
 	}
@@ -58,25 +56,27 @@ function generatePassword(length, characters, specialCharacters) {
 		number: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
 		specialChars: ['!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '_', '`', '{', '|', '}', '~'],
 	}
-	var randomPassword = []
+	var password = []
 
 	if (characters === 'YES' && specialCharacters === 'YES') {
 		var allCharacter = characterTypes.lowercase.concat(characterTypes.uppercase, characterTypes.number, characterTypes.specialChars)
-		for (var i = 0; i < length; i++) {
-			randomPassword.push(allCharacter[Math.floor(Math.random() * allCharacter.length)])
-		}
+		passwordBuilder(allCharacter, length)
 	} else if (characters === 'YES' && specialCharacters === 'NO') {
 		var allCharacter = characterTypes.lowercase.concat(characterTypes.uppercase, characterTypes.number)
-		for (var i = 0; i < length; i++) {
-			randomPassword.push(allCharacter[Math.floor(Math.random() * allCharacter.length)])
-		}
+		passwordBuilder(allCharacter, length)
 	} else {
 		var allCharacter = characterTypes.specialChars
-		for (var i = 0; i < length; i++) {
-			randomPassword.push(allCharacter[Math.floor(Math.random() * allCharacter.length)])
+		passwordBuilder(allCharacter, length)
+	}
+	return password.join('')
+
+	function passwordBuilder(characters, length) {
+		var i = 0
+		while (i < length) {
+			password.push(characters[Math.floor(Math.random() * characters.length)])
+			i++
 		}
 	}
-	return randomPassword.join('')
 }
 
 function showErrorMessages(errorMessages) {
