@@ -5,6 +5,7 @@
   --dark-semi-transparent: rgba(16,0,43,0.5);
   --light-shade: #fff;
   --button-color: #3C096C; 
+  --border-color: rgba(240, 46, 170, 0.4);
   /* effects */
   --box-shadow-insane: rgba(240, 46, 170, 0.4) 5px 5px, rgba(240, 46, 170, 0.3) 10px 10px, rgba(240, 46, 170, 0.2) 15px 15px, rgba(240, 46, 170, 0.1) 20px 20px, rgba(240, 46, 170, 0.05) 25px 25px;
   color: hsl(206, 17%, 28%); 
@@ -97,6 +98,17 @@ header {
   clear: both;
 }
 
+.error-messages__title {
+  font-size: 1rem;
+  font-weight: 500;
+  display: none;
+  padding-left: 10px;
+}
+
+.error-messages__title--show {
+  display: block;
+}
+
 .error-messages {
   color: rgb(255, 0, 0);
   text-shadow: none;
@@ -110,6 +122,7 @@ header {
 
 .error-messages li {
   list-style-type: none;
+  
 }
 
 .error-messages li::before {
@@ -131,14 +144,7 @@ header {
   cursor: pointer;
 }
 
-button[disabled] {
-  cursor: default;
-  background: #c0c7cf;
-}
 
-.float-right {
-  float: right;
-}
 
 #password {
   -webkit-appearance: none;
@@ -151,13 +157,13 @@ button[disabled] {
   padding-left: 15px;
   padding-right: 15px;
   padding-bottom: 85px;
-  text-align: center;
   margin-top: 10px;
   margin-bottom: 10px;
   border: 2px solid var(--light-shade);
   border-radius: 6px;
   resize: none;
-  overflow: hidden;
+  overflow: scroll;
+  text-align: center;
 }
 
 @media (max-width: 690px) {
@@ -181,7 +187,8 @@ button[disabled] {
 }
 
 @media (max-width: 500px) {
-  .btn {
+  .btn,
+  #password {
     font-size: 0.8rem;
   }
 }
