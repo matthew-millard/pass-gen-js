@@ -1,6 +1,7 @@
 var button = document.querySelector('#generate')
 var passwordText = document.querySelector('#password')
 var errorList = document.querySelector('.error-messages__list')
+var showErrorMessages = document.querySelector('.error-messages__title')
 var password = []
 
 var characterTypes = {
@@ -16,7 +17,7 @@ function writePassword() {
 	var lowerChars = prompt('Would you like your password to contain lowercase letters? yes / no').trim().toUpperCase()
 	var upperChars = prompt('Would you like your password to contain uppercase letters? yes / no').trim().toUpperCase()
 	var numberChars = prompt('Would you like your password to contain numbers? yes / no').trim().toUpperCase()
-	var specialChars = prompt('Would you like your password to include special characters? yes / no').trim().toUpperCase()
+	var specialChars = prompt('Would you like your password to include special characters? E.g  !"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~   yes / no').trim().toUpperCase()
 	var errorMessages = []
 
 	if (!numOfChars || numOfChars < 8 || numOfChars > 128) {
@@ -57,7 +58,7 @@ function writePassword() {
 		return
 	}
 	generatePassword(numOfChars, lowerChars, upperChars, numberChars, specialChars)
-	passwordText.value = password.join('')
+	passwordText.value = password.join('') // Display password in the textarea
 }
 
 button.addEventListener('click', writePassword)
@@ -94,6 +95,7 @@ function createPassword(charactersCombined, numOfChars) {
 
 // Show errors function
 function showErrors(errorMessages) {
+	showErrorMessages.classList.add('error-messages__title--show')
 	errorMessages.forEach(error => {
 		var li = document.createElement('li')
 		errorList.appendChild(li).innerText = error
@@ -105,4 +107,5 @@ function clearErrors() {
 	while (errorList.children[0] != null) {
 		errorList.removeChild(errorList.children[0])
 	}
+	showErrorMessages.classList.remove('error-messages__title--show')
 }
