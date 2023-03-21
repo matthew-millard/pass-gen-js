@@ -1,5 +1,6 @@
 var button = document.querySelector('#generate')
 var passwordText = document.querySelector('#password')
+var errorList = document.querySelector('.error-messages__list')
 var password = []
 
 var characterTypes = {
@@ -10,6 +11,7 @@ var characterTypes = {
 }
 
 function writePassword() {
+	clearErrors()
 	var numOfChars = Math.round(prompt('How many characters long would you like your password to be?'))
 	var lowerChars = prompt('Would you like your password to contain lowercase letters? yes / no').trim().toUpperCase()
 	var upperChars = prompt('Would you like your password to contain uppercase letters? yes / no').trim().toUpperCase()
@@ -47,7 +49,6 @@ function writePassword() {
 
 	if (lowerChars === 'NO' && upperChars === 'NO' && numberChars === 'NO' && specialChars === 'NO') {
 		errorMessages.push('Password must include at least one character type.')
-		console.log(errorMessages)
 	}
 
 	if (errorMessages.length > 0) {
@@ -93,7 +94,6 @@ function createPassword(charactersCombined, numOfChars) {
 
 // Show errors function
 function showErrors(errorMessages) {
-	var errorList = document.querySelector('.error-messages__list')
 	errorMessages.forEach(error => {
 		var li = document.createElement('li')
 		errorList.appendChild(li).innerText = error
@@ -101,4 +101,8 @@ function showErrors(errorMessages) {
 }
 
 // Clear errors function
-function clearErrors() {}
+function clearErrors() {
+	while (errorList.children[0] != null) {
+		errorList.removeChild(errorList.children[0])
+	}
+}
