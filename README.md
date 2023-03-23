@@ -18,7 +18,7 @@ Create and deploy a password generator application so users can obtain a random 
 
 [PassGen JS Github Repository](https://github.com/matthew-millard/pass-gen-js)
 
-[PassGen JS Github Pages](#https://matthew-millard.github.io/pass-gen-js/)
+[PassGen JS Github Pages](https://matthew-millard.github.io/pass-gen-js/)
 
 ## Screenshots
 
