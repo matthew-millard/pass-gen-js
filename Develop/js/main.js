@@ -2,7 +2,6 @@ var button = document.querySelector('#generate')
 var passwordText = document.querySelector('#password')
 var errorList = document.querySelector('.error-messages__list')
 var showErrorMessages = document.querySelector('.error-messages__title')
-var password = []
 
 var characterTypes = {
 	lowercase: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'],
@@ -13,6 +12,7 @@ var characterTypes = {
 
 function writePassword() {
 	clearErrors()
+	var password = []
 	var numOfChars = Math.round(prompt('How many characters long would you like your password to be?'))
 	var lowerChars = prompt('Would you like your password to contain lowercase letters? yes / no').trim().toUpperCase()
 	var upperChars = prompt('Would you like your password to contain uppercase letters? yes / no').trim().toUpperCase()
@@ -57,14 +57,14 @@ function writePassword() {
 		showErrors(errorMessages)
 		return
 	}
-	generatePassword(numOfChars, lowerChars, upperChars, numberChars, specialChars)
+	generatePassword(numOfChars, lowerChars, upperChars, numberChars, specialChars, password)
 	passwordText.value = password.join('') // Display password in the textarea
 }
 
 button.addEventListener('click', writePassword)
 
 // Generate Password function
-function generatePassword(numOfChars, lowerChars, upperChars, numberChars, specialChars) {
+function generatePassword(numOfChars, lowerChars, upperChars, numberChars, specialChars, password) {
 	var charactersCombined = []
 
 	if (lowerChars === 'YES') {
@@ -82,12 +82,12 @@ function generatePassword(numOfChars, lowerChars, upperChars, numberChars, speci
 	if (specialChars === 'YES') {
 		charactersCombined.push(...characterTypes.specialChars)
 	}
-	createPassword(charactersCombined, numOfChars)
+	createPassword(charactersCombined, numOfChars, password)
 	return password
 }
 
 // Create Password
-function createPassword(charactersCombined, numOfChars) {
+function createPassword(charactersCombined, numOfChars, password) {
 	for (var i = 0; i < numOfChars; i++) {
 		password.push(charactersCombined[Math.floor(Math.random() * charactersCombined.length)])
 	}
