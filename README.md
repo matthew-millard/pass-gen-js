@@ -12,7 +12,7 @@
 
 ## The Assignment Brief
 
-Create and deploy a password generator application so users can obtain a random password. Users should choose criteria to include in their password, such as character types and length.
+Create and deploy a password generator application so users can obtain a random password. Users should choose criteria to include in their password, such as character types and length. Error messages should be displayed to the user if invalid inputs are made.
 
 ## Links
 
